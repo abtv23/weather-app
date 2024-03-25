@@ -1,17 +1,24 @@
 import Card from 'react-bootstrap/Card';
+import { CityCardType } from '../state/weather/weatherSlice';
+import { FC } from 'react';
 
-export default function CityCard() {
+interface Props {
+    cityCard: CityCardType
+}
+
+const CityCard: FC<Props> = ({cityCard}) => {
+    console.log(cityCard)
     return (
         <Card>
-            <Card.Img variant="top" src="holder.js/100px160" />
             <Card.Body>
-                <Card.Title>Card title</Card.Title>
+                <Card.Title>{cityCard.name}</Card.Title>
                 <Card.Text>
-                    This is a longer card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
+                   <h6>Temperature: {cityCard.temperature} °C</h6>
+                   <h6>{cityCard.weatherType}</h6>
                 </Card.Text>
             </Card.Body>
         </Card>
     )
 }
+
+export default CityCard

@@ -7,7 +7,7 @@ interface Error {
     message?: string;
 }
 
-interface CityCard {
+export type CityCardType = {
     name: string;
     temperature: number;
     weatherType: weatherType
@@ -15,7 +15,7 @@ interface CityCard {
 
 interface WeatherSlice {
     searchInputValue: string;
-    cityCards: CityCard[];
+    cityCards: CityCardType[];
     isLoading: boolean;
     error: Error;
 }
@@ -66,7 +66,7 @@ const weatherSlice = createSlice({
         searchInputValueChanged: (state, action: PayloadAction<string>) => {
             state.searchInputValue += action.payload
         },
-        setCityCards: (state, action: PayloadAction<CityCard[]>) => {
+        setCityCards: (state, action: PayloadAction<CityCardType[]>) => {
             state.cityCards = action.payload
         }
     },
@@ -81,13 +81,14 @@ const weatherSlice = createSlice({
         })
     },
     selectors: {
-        loadingSelector: (state) => state.isLoading
+        loadingSelector: (state) => state.isLoading,
+        cityCardsSelector: (state) => state.cityCards
     }
 })
 
 export const fetchCityWeather = createAsyncThunk(
     "weather/fetchCityWeather",
-    async (cityName: 'string', { rejectWithValue }): Promise<CityCard[]> => {
+    async (cityName: 'string', { rejectWithValue }): Promise<CityCardType[]> => {
         const response: any = await new Promise ((resolve) => setTimeout(resolve, 1000)); // cityName
 
         if (!response.ok) {
@@ -99,6 +100,6 @@ export const fetchCityWeather = createAsyncThunk(
     }
 )
 
-export const {} = weatherSlice.actions
+export const weatherSliceSelectors = weatherSlice.selectors
+export const weatherSliceActions = weatherSlice.actions
 export default weatherSlice.reducer
-export const { loadingSelector } = weatherSlice.selectors

@@ -1,10 +1,11 @@
 .search-input-wrapper {
     text-align: center;
     position: relative;
-    width: -webkit-fill-available;
-    margin-bottom: 50px;
+    margin: auto;
+    width: 520px;
+    margin-bottom: 40px;
 }
 
-input {
-    width: 500px;
+.search-input-div {
+    width: -webkit-fill-available;
 }

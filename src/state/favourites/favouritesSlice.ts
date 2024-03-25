@@ -27,18 +27,18 @@ const favouritesSlice = createSlice({
     name: "favourites",
     initialState,
     reducers: {
+        toggleFavouriteCity: (state, action: PayloadAction<{ isLiked: boolean; cityName: string }>) => {
+            if (action.payload.isLiked) {
+                state.favouriteCities = state.favouriteCities.concat(action.payload.cityName)
+            }
+        },
         toggleFavourites: (state, action: PayloadAction<boolean>) => {
             state.show = action.payload
         }
-        // searchInputValueChanged: (state, action: PayloadAction<string>) => {
-        //     state.searchInputValue += action.payload
-        // },
-        // setCityCards: (state, action: PayloadAction<CityCard[]>) => {
-        //     state.cityCards = action.payload
-        // }
     },
     selectors: {
-        favouritesIsOpen: (state) => state.show
+        favouritesIsOpen: (state) => state.show,
+        favouriteCities: (state) => state.favouriteCities
     }
 })
 

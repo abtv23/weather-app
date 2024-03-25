@@ -1,25 +1,26 @@
 import { FC } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { useAppSelector } from '../state/store';
 import { favouritesSliceSelectors, favouritesSliceActions } from '../state/favourites/favouritesSlice';
-import { useAppDispatch } from "../state/store";
-
+import { useAppDispatch, useAppSelector } from "../state/store";
 
 const FavouritesBar: FC = () => {
   const showFavourites = useAppSelector(favouritesSliceSelectors.favouritesIsOpen)
+  const likedCities = useAppSelector(favouritesSliceSelectors.favouriteCities)
   const dispatch = useAppDispatch()
   const closeFavourites = () => {
     dispatch(favouritesSliceActions.toggleFavourites(false))
   }
+
   return (
     <>
       <Offcanvas show={showFavourites} onHide={closeFavourites}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>List of cities added to favourites</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          {likedCities.map((likedCity) => (
+            <h5>{likedCity}</h5>
+          ))}
         </Offcanvas.Body>
       </Offcanvas>
     </>
