@@ -29,7 +29,12 @@ const favouritesSlice = createSlice({
     reducers: {
         toggleFavouriteCity: (state, action: PayloadAction<{ isLiked: boolean; cityName: string }>) => {
             if (action.payload.isLiked) {
-                state.favouriteCities = state.favouriteCities.concat(action.payload.cityName)
+                state.favouriteCities = [
+                    action.payload.cityName,
+                    ...state.favouriteCities
+                ]
+            } else {
+                state.favouriteCities = state.favouriteCities.filter(city => city !== action.payload.cityName)
             }
         },
         toggleFavourites: (state, action: PayloadAction<boolean>) => {

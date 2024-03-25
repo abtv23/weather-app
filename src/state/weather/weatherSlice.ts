@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
  
-type weatherType = 'sun' | 'snow' | 'rain' | 'wind'
+type weatherType = 'sun' | 'snow' | 'rain' 
 
 interface Error {
     hasError: boolean;
@@ -40,16 +40,16 @@ const initialState: WeatherSlice = {
     {
         name: "Marseille",
         temperature: 20,
-        weatherType: "wind"
+        weatherType: "rain"
     },
     {
-        name: "Sofia",
-        temperature: 20,
-        weatherType: "sun"
+        name: "Varna",
+        temperature: 10,
+        weatherType: "snow"
     },
     {
-        name: "Sofia",
-        temperature: 20,
+        name: "Tokio",
+        temperature: 23,
         weatherType: "sun"
     }
     ],

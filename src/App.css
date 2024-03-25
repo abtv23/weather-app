@@ -5,6 +5,8 @@
   text-align: center;
 } */
 body {
-  width: -webkit-fill-available;  
-  display: block; 
+  width: -webkit-fill-available;
+  display: block;
+  background: rgb(172, 172, 234);
+  background: linear-gradient(329deg, rgba(172, 172, 234, 0.7974002100840336) 0%, rgba(239, 238, 255, 1) 32%, rgba(169, 241, 255, 1) 100%);
 }

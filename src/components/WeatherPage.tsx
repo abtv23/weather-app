@@ -12,6 +12,9 @@ export default function WeatherPage() {
     const openFavourites = () => {
         dispatch(favouritesSliceActions.toggleFavourites(true))
     }
+    const toggleFavouriteCity = () => {
+       // dispatch(favouritesSliceActions.toggleFavouriteCity({ isLiked, cityName }))
+    }
 
     return(
         <div className={styles["weather-page-wrapper"]}>
