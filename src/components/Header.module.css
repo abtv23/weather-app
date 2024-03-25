@@ -1,0 +1,13 @@
+header {
+    background-color: #6385a8;
+    height: 40px;
+    margin-bottom: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    column-gap: 20px;
+    z-index: 10;
+    justify-content: space-between;
+    position: relative;
+    width: -webkit-fill-available;
+}

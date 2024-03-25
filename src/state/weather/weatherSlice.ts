@@ -10,7 +10,6 @@ interface Error {
 interface CityCard {
     name: string;
     temperature: number;
-    isLiked: boolean;
     weatherType: weatherType
 }
 
@@ -23,7 +22,37 @@ interface WeatherSlice {
 
 const initialState: WeatherSlice = {
     searchInputValue: '',
-    cityCards: [],
+    cityCards: [ {
+        name: "Sofia",
+        temperature: 20,
+        weatherType: "sun"
+    },
+    {
+        name: "Plovdiv",
+        temperature: 24,
+        weatherType: "sun"
+    },
+    {
+        name: "Valencia",
+        temperature: 26,
+        weatherType: "sun"
+    },
+    {
+        name: "Marseille",
+        temperature: 20,
+        weatherType: "wind"
+    },
+    {
+        name: "Sofia",
+        temperature: 20,
+        weatherType: "sun"
+    },
+    {
+        name: "Sofia",
+        temperature: 20,
+        weatherType: "sun"
+    }
+    ],
     isLoading: false,
     error: {
         hasError: false,

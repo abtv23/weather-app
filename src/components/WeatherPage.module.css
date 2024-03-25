@@ -1,0 +1,14 @@
+.weather-page-wrapper {
+    background-color: #6385a8;
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    z-index: 10;
+    position: absolute;
+    justify-content: flex-start;
+    top: 0px;
+    align-items: center;
+    width: -webkit-fill-available;
+}
