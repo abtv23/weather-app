@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import styles from './Header.module.css'
-import Button from 'react-bootstrap/Button';
 
 interface Props {
     handleShow: () => void;
@@ -9,9 +8,9 @@ interface Props {
 const Header: FC<Props> = ({ handleShow }) => {
     return (
         <header className={styles["header"]}>
-            <Button variant="primary" onClick={handleShow} className="me-2">
+            <button className={styles["favourites-selection-button"]} onClick={handleShow}>
                 Favourites
-            </Button>
+            </button>
         </header>
     )
 }

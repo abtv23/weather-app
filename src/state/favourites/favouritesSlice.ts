@@ -12,11 +12,7 @@ interface FavouritesState {
 }
 
 const initialState: FavouritesState = {
-    favouriteCities: [
-        'Sofia',
-        'Plovdiv',
-        'Valencia'
-    ],
+    favouriteCities: [],
     error: {
         hasError: false
     },
@@ -39,6 +35,12 @@ const favouritesSlice = createSlice({
         },
         toggleFavourites: (state, action: PayloadAction<boolean>) => {
             state.show = action.payload
+        },
+        removeFavouriteCity: (state, action: PayloadAction<{ addToFavourites: false; cityName: string }>) => {
+            state.favouriteCities = state.favouriteCities.filter(city => city !== action.payload.cityName)
+        },
+        setFavouriteCities: (state, action: PayloadAction<string[]>) => {
+            state.favouriteCities = action.payload
         }
     },
     selectors: {

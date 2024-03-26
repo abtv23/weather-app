@@ -1,0 +1,13 @@
+.favourite-city-card {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 350px;
+    margin-bottom: 25px;
+    padding: 12px;
+}
+
+.remove-favourite-city {
+    position: absolute;
+    right: 1px;
+}

@@ -15,7 +15,8 @@ const weatherTypeToEmoji = {
     'Light snow': "☃️",
     'Light rain': "☔",
     'Light rain shower': "☔",
-    'Partly cloudy': "⛅"
+    'Partly cloudy': "⛅",
+    'Overcast': "☁️"
 }
 
 const CityCard: FC<Props> = ({ cityCard, addToFavouriteCities, favouriteCities }) => {
@@ -24,14 +25,14 @@ const CityCard: FC<Props> = ({ cityCard, addToFavouriteCities, favouriteCities }
         addToFavouriteCities(isLiked, cityCard.name)
     }
     return (
-        <Card>
+        <Card className={styles['city-card']}>
             <Card.Body>
-                <Card.Title>
+                <Card.Title className={styles['city-card-title']}>
                     <Button className={styles['like-button']} onClick={onLikeClick}>{isLiked ? "♥" : "♡"}</Button>
                     {cityCard.name}, {cityCard.country}
                 </Card.Title>
                 <Card.Text>
-                    <h6>Temperature: {cityCard.temperature} °C</h6>
+                    <h6 className={styles['temperature']}>Temperature: {cityCard.temperature} °C</h6>
                     <h6 className={styles['weather-emoji']}>{weatherTypeToEmoji[cityCard.weatherType]}</h6>
                 </Card.Text>
             </Card.Body>

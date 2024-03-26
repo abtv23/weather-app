@@ -1,3 +1,4 @@
+import { ChangeEvent, useEffect } from 'react';
 import Header from "./Header";
 import SearchInput from "./SearchInput";
 import WeatherGrid from "./WeatherGrid";
@@ -6,12 +7,14 @@ import { favouritesSliceActions, favouritesSliceSelectors } from "../state/favou
 import { useAppDispatch, useAppSelector } from "../state/store";
 import { fetchCityWeather, weatherSliceActions, weatherSliceSelectors } from "../state/weather/weatherSlice";
 import Loader from "./Loader";
+import ErrorAlert from './ErrorAlert';
 
 export default function WeatherPage() {
     const favouriteCities = useAppSelector(favouritesSliceSelectors.favouriteCities)
     const cityCards = useAppSelector(weatherSliceSelectors.cityCardsSelector)
     const searchInputValue = useAppSelector(weatherSliceSelectors.searchInputValueSelector)
     const isLoading = useAppSelector(weatherSliceSelectors.isLoading)
+    const error = useAppSelector(weatherSliceSelectors.error)
 
     const dispatch = useAppDispatch()
     const openFavourites = () => {
@@ -20,27 +23,58 @@ export default function WeatherPage() {
     const addToFavouriteCities = (isLiked: boolean, cityName: string) => {
         dispatch(favouritesSliceActions.toggleFavouriteCity({ addToFavourites: !isLiked, cityName: cityName }))
     }
-    const searchInputValueChanged = (e: any) => { //TODO: add type to e
+    const searchInputValueChanged = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(weatherSliceActions.searchInputValueChanged(e.target.value))
     }
 
-    const onSearchHandler = () => {
+    useEffect(() => {
+        const onLoad = () => {
+            const localStorageFavCitiesRaw = localStorage.getItem('favCities')
+            if (localStorageFavCitiesRaw) {
+                const localStorageFavCities = JSON.parse(localStorageFavCitiesRaw)
+                if (localStorageFavCities?.length) {
+                    dispatch(favouritesSliceActions.setFavouriteCities(localStorageFavCities))
 
-        for (let i = 0; i < cityCards.length; i++) {
+                    localStorageFavCities.forEach((favCity: string) => {
+                        dispatch(fetchCityWeather(favCity))
+                    })
+                }
+            } else { // if never set in localStorage
+                const DEFAULT_CITIES = ['Sofia', 'Valencia', 'New York', 'Tokyo']
+                dispatch(favouritesSliceActions.setFavouriteCities(DEFAULT_CITIES))
 
-            if (cityCards[i].name == searchInputValue) {
-                return null
+                DEFAULT_CITIES.forEach(favCity => {
+                    dispatch(fetchCityWeather(favCity))
+                })
             }
         }
-        dispatch(fetchCityWeather(searchInputValue))
-        dispatch(weatherSliceActions.setDefaultInputValue())
+        const onBlur = () => {
+            localStorage.setItem('favCities', JSON.stringify(favouriteCities))
+        }
 
-        // //if(cityCards.includes(searchInputValue))
-        // dispatch(fetchCityWeather(searchInputValue))
-        // dispatch(weatherSliceActions.setDefaultInputValue())
+        window.addEventListener("load", onLoad);
+        window.addEventListener("beforeunload", onBlur);
+
+        return () => {
+            window.removeEventListener("focus", onLoad);
+            window.removeEventListener("beforeunload", onBlur);
+        };
+    }, [favouriteCities])
+
+    const onSearchHandler = () => {
+        const alreadyHasCity = cityCards.findIndex(cityCard => cityCard.name === searchInputValue)
+
+        dispatch(weatherSliceActions.setDefaultInputValue())
+        if (alreadyHasCity !== -1) {
+            // TODO: display warning;
+            return null;
+        }
+        dispatch(fetchCityWeather(searchInputValue))
     }
 
-
+    const onCloseHandler = () => {
+        dispatch(weatherSliceActions.cleanError())
+    }
 
     return (
         <div className={styles["weather-page-wrapper"]}>
@@ -51,6 +85,8 @@ export default function WeatherPage() {
                 addToFavouriteCities={addToFavouriteCities}
                 favouriteCities={favouriteCities}
             />
+            <Loader isLoading={isLoading} />
+            <ErrorAlert error={error} onClose={onCloseHandler}/>
         </div>
     )
 }

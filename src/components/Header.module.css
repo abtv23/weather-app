@@ -11,3 +11,8 @@ header {
     position: relative;
     width: -webkit-fill-available;
 }
+.favourites-selection-button{
+    background: transparent;
+    padding: 8px;
+    color: white;
+}

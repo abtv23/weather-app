@@ -14,7 +14,7 @@ interface Props {
 const WeatherGrid: FC<Props> = ({ cityCards, addToFavouriteCities, favouriteCities }) => {
     return (
         <div className={styles['weather-grid-wrapper']}>
-            <Row xs={1} md={3} className="g-4">
+            <Row xs={1} md={3} className='g-4' style={{ width: '100%' }}>
                 {cityCards.map((cityCard, idx) => (
                     <Col key={idx}>
                         <CityCard cityCard={cityCard} addToFavouriteCities={addToFavouriteCities} favouriteCities={favouriteCities} />

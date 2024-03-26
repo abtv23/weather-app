@@ -4,11 +4,24 @@
     color: black;
     position: relative;
     margin-right: 15px;
+    border-radius: 50%;
+    margin: 0%;
 }
-
 .weather-emoji{
     position: absolute;
-    right: 18px;
-    bottom: 13px;
+    right: 15px;
+    top: 40px;
     font-size: 60px;
+}
+.city-card {
+    width: 310px;
+    height: 130px;
+    margin:10px
+}
+.city-card-title {
+    width: 100%;
+}
+.temperature {
+    position: absolute;
+    bottom: 16px;
 }
