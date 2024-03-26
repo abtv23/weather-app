@@ -1,27 +1,33 @@
-# React + TypeScript + Vite
+## Project Real-Time Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### Description
 
-Currently, two official plugins are available:
+TweetWorld 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+An application used to fetch and display weather data from a public API, built with React, TypeScript, Redux.
 
-## Expanding the ESLint configuration
+## Project Screen Shot(s)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![Alt text](image.png)
 
-- Configure the top-level `parserOptions` property like this:
+![Alt text](image-1.png)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+![Alt text](image-2.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation and Setup Instructions
+
+####   
+
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+
+Installation:
+
+`npm install`  
+
+To Start App:
+
+`npm run dev`  
+
+To Visit App:
+
+`localhost:5173`  
