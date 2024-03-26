@@ -20,15 +20,15 @@ const initialState: FavouritesState = {
     error: {
         hasError: false
     },
-    show: false
+    show: false,
 }
 
 const favouritesSlice = createSlice({
     name: "favourites",
     initialState,
     reducers: {
-        toggleFavouriteCity: (state, action: PayloadAction<{ isLiked: boolean; cityName: string }>) => {
-            if (action.payload.isLiked) {
+        toggleFavouriteCity: (state, action: PayloadAction<{ addToFavourites: boolean; cityName: string }>) => {
+            if (action.payload.addToFavourites) {
                 state.favouriteCities = [
                     action.payload.cityName,
                     ...state.favouriteCities
@@ -43,7 +43,7 @@ const favouritesSlice = createSlice({
     },
     selectors: {
         favouritesIsOpen: (state) => state.show,
-        favouriteCities: (state) => state.favouriteCities
+        favouriteCities: (state) => state.favouriteCities,
     }
 })
 

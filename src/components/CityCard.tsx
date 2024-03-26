@@ -6,22 +6,29 @@ import styles from './CityCard.module.css'
 
 interface Props {
     cityCard: CityCardType
+    addToFavouriteCities: (isLiked: boolean, cityName: string) => void
+    favouriteCities: string[];
 }
 
 const weatherTypeToEmoji = {
-    'sun': "☀️",
-    'snow': "☃️",
-    'rain': "☔"
+    'Sunny': "☀️",
+    'Light snow': "☃️",
+    'Light rain': "☔",
+    'Light rain shower': "☔",
+    'Partly cloudy': "⛅"
 }
 
-const CityCard: FC<Props> = ({ cityCard }) => {
-    console.log(cityCard)
+const CityCard: FC<Props> = ({ cityCard, addToFavouriteCities, favouriteCities }) => {
+    const isLiked: boolean = favouriteCities.includes(cityCard.name)
+    const onLikeClick = () => {
+        addToFavouriteCities(isLiked, cityCard.name)
+    }
     return (
         <Card>
             <Card.Body>
                 <Card.Title>
-                    <Button className={styles['like-button']}>{false ? "♡" : "♥"}</Button>
-                    {cityCard.name}
+                    <Button className={styles['like-button']} onClick={onLikeClick}>{isLiked ? "♥" : "♡"}</Button>
+                    {cityCard.name}, {cityCard.country}
                 </Card.Title>
                 <Card.Text>
                     <h6>Temperature: {cityCard.temperature} °C</h6>

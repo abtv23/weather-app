@@ -6,16 +6,18 @@ import CityCard from './CityCard';
 import { FC } from 'react';
 
 interface Props {
-    cityCards: CityCardType[]
+    cityCards: CityCardType[];
+    addToFavouriteCities: (isLiked: boolean, cityName: string) => void;
+    favouriteCities: string[];
 }
 
-const WeatherGrid: FC<Props> = ({cityCards}) => {
+const WeatherGrid: FC<Props> = ({ cityCards, addToFavouriteCities, favouriteCities }) => {
     return (
         <div className={styles['weather-grid-wrapper']}>
             <Row xs={1} md={3} className="g-4">
                 {cityCards.map((cityCard, idx) => (
                     <Col key={idx}>
-                        <CityCard cityCard={cityCard}/>
+                        <CityCard cityCard={cityCard} addToFavouriteCities={addToFavouriteCities} favouriteCities={favouriteCities} />
                     </Col>
                 ))}
             </Row>
